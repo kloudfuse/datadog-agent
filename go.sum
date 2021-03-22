@@ -151,6 +151,8 @@ github.com/DataDog/mmh3 v0.0.0-20200316233529-f5b682d8c981 h1:UcKqIrOowv2PjTkOC2
 github.com/DataDog/mmh3 v0.0.0-20200316233529-f5b682d8c981/go.mod h1:SvsjzyJlSg0rKsqYgdcFxeEVflx3ZNAyFfkUHP0TxXg=
 github.com/DataDog/nikos v0.0.0-20210212215538-830c817043ae h1:FVg6N1FttPeieaOLFIpRSqPrVXk7XkXYvmPmrWLln0E=
 github.com/DataDog/nikos v0.0.0-20210212215538-830c817043ae/go.mod h1:m4dT3ncRR/jXiTdwg4GLK8gGJdGJILin+3A4paL8Rxg=
+github.com/DataDog/nikos v0.0.0-20210322193910-9e6d03f1a444 h1:JA5zu1W6xLhH1I34qarRZrCAkmVXbIfZIon08C9dwzQ=
+github.com/DataDog/nikos v0.0.0-20210322193910-9e6d03f1a444/go.mod h1:m4dT3ncRR/jXiTdwg4GLK8gGJdGJILin+3A4paL8Rxg=
 github.com/DataDog/sketches-go v1.0.0 h1:chm5KSXO7kO+ywGWJ0Zs6tdmWU8PBXSbywFVciL6BG4=
 github.com/DataDog/sketches-go v1.0.0/go.mod h1:O+XkJHWk9w4hDwY2ZUDU31ZC9sNYlYo8DiFsxjYeo1k=
 github.com/DataDog/viper v1.8.0 h1:+0s6jzOzQEpMCW+c4bkirz+4vNoWm4jmiQNmKfO2p38=

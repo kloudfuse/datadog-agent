@@ -48,7 +48,7 @@ require (
 	github.com/DataDog/gohai v0.0.0-20210303102637-6b668acb50dd
 	github.com/DataDog/gopsutil v0.0.0-20200624212600-1b53412ef321
 	github.com/DataDog/mmh3 v0.0.0-20200316233529-f5b682d8c981 // indirect
-	github.com/DataDog/nikos v0.0.0-20210212215538-830c817043ae
+	github.com/DataDog/nikos v0.0.0-20210322193910-9e6d03f1a444
 	github.com/DataDog/sketches-go v1.0.0
 	github.com/DataDog/watermarkpodautoscaler v0.2.1-0.20210209165213-28eb1cc35a8d
 	github.com/DataDog/zstd v0.0.0-20160706220725-2bf71ec48360
