@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/DataDog/datadog-agent/pkg/util/log"
 
@@ -61,7 +62,7 @@ func DownloadHeaders(outputDirPath string) ([]string, error) {
 	}
 
 	headerDirs := []string{fmt.Sprintf(outputDir+kernelModulesPath, target.Uname.Kernel)}
-	if target.Distro.Display == "Debian" {
+	if strings.ToLower(target.Distro.Display) == "debian" {
 		headerDirs = append(headerDirs, fmt.Sprintf(outputDir+"/lib/modules/%s/source", target.Uname.Kernel))
 	}
 	return headerDirs, nil
@@ -84,16 +85,16 @@ func getHeaderDownloadTarget() (types.Target, error) {
 
 func getHeaderDownloadBackend(target *types.Target) (backend types.Backend, err error) {
 	logger := customLogger{}
-	switch target.Distro.Display {
-	case "Fedora", "RHEL":
+	switch strings.ToLower(target.Distro.Display) {
+	case "fedora", "rhel":
 		backend, err = rpm.NewRedHatBackend(target, "/etc/yum.repos.d", logger)
-	case "CentOS":
+	case "centos":
 		backend, err = rpm.NewCentOSBackend(target, "/etc/yum.repos.d", logger)
-	case "openSUSE":
+	case "opensuse":
 		backend, err = rpm.NewOpenSUSEBackend(target, "/etc/zypp/repos.d", logger)
-	case "SLE":
+	case "sle":
 		backend, err = rpm.NewSLESBackend(target, "/etc/zypp/repos.d", logger)
-	case "Debian", "Ubuntu":
+	case "debian", "ubuntu":
 		backend, err = apt.NewBackend(target, "/etc/apt", logger)
 	case "cos":
 		backend, err = cos.NewBackend(target, logger)
