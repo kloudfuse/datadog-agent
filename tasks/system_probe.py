@@ -130,25 +130,20 @@ def build(
     if bundle_ebpf:
         build_tags.append("ebpf_bindata")
 
-    # build_tags.append("dnf")
-    # nikos_build_flags = 'PKG_CONFIG_PATH=' + NIKOS_EMBEDDED_PATH + '/lib/pkgconfig '
-    # nikos_build_flags += 'CGO_LDFLAGS="-Wl,-rpath,' + NIKOS_EMBEDDED_PATH + '/lib"'
-    # nikos_omnibus_build(ctx)
+    build_tags.append("dnf")
+    nikos_build_flags = 'PKG_CONFIG_PATH=' + NIKOS_EMBEDDED_PATH + '/lib/pkgconfig '
+    nikos_build_flags += 'CGO_LDFLAGS="-Wl,-rpath,' + NIKOS_EMBEDDED_PATH + '/lib"'
+    nikos_omnibus_build(ctx)
 
     if with_bcc:
         build_tags.append(BCC_TAG)
 
     # TODO static option
-    # cmd = '{nikos_build_flags} go build -mod={go_mod} {race_opt} {build_type} -tags "{go_build_tags}" '
-    # cmd += '-o {agent_bin} -gcflags="{gcflags}" -ldflags="{ldflags}" {REPO_PATH}/cmd/system-probe'
-
-    # args = {
-    #     "nikos_build_flags": nikos_build_flags,
-    
-    cmd = 'go build -mod={go_mod} {race_opt} {build_type} -tags "{go_build_tags}" '
+    cmd = '{nikos_build_flags} go build -mod={go_mod} {race_opt} {build_type} -tags "{go_build_tags}" '
     cmd += '-o {agent_bin} -gcflags="{gcflags}" -ldflags="{ldflags}" {REPO_PATH}/cmd/system-probe'
 
     args = {
+        "nikos_build_flags": nikos_build_flags,
         "go_mod": go_mod,
         "race_opt": "-race" if race else "",
         "build_type": "" if incremental_build else "-a",
