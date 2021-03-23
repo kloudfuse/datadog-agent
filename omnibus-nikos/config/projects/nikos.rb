@@ -20,8 +20,6 @@ dependency "preparation"
 
 if linux?
   dependency 'libdnf'
-  dependency 'pacman'
-  dependency 'apk-tools'
 end
 
 
