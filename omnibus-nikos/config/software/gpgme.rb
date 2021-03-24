@@ -14,26 +14,37 @@
 # limitations under the License.
 #
 
-name "sqlite"
-default_version "3.33.0"
+name "gpgme"
+default_version "1.14.0"
 
-dependency 'libedit'
-dependency 'zlib'
+dependency "automake"
+dependency "libassuan"
 
-license "Public Domain"
+license "LGPL-2.1"
+license_file "COPYING.LIB"
 skip_transitive_dependency_licensing true
 
-version("3.33.0") do
-  source url: "https://www.sqlite.org/2020/sqlite-autoconf-3330000.tar.gz",
-         sha256: "106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15"
-end
+version("1.14.0") { source sha256: "cef1f710a6b0d28f5b44242713ad373702d1466dcbe512eb4e754d7f35cd4307" }
 
-relative_path "sqlite-autoconf-3330000"
+source url: "https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-#{version}.tar.bz2"
+
+relative_path "gpgme-#{version}"
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
 
-  configure_options = []
+  patch source: "0001-Disable-Wsuggest-override.patch"
+
+  command "./autogen.sh", env: env
+
+  configure_options = [
+    "--enable-maintainer-mode",
+    "--disable-gpgconf-test",
+    "--disable-gpg-test",
+    "--disable-gpgsm-test",
+    "--disable-g13-test",
+  ]
+
   configure(*configure_options, env: env)
 
   make "-j #{workers}", env: env

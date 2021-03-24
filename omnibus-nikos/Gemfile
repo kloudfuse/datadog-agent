@@ -3,10 +3,6 @@ source 'https://rubygems.org'
 # Install omnibus
 gem "omnibus", git: "https://github.com/ISauve/omnibus", branch: "isabelle.sauve/nikos"
 
-# Use Chef's software definitions. It is recommended that you write your own
-# software definitions, but you can clone/fork Chef's to get you started.
-gem 'omnibus-software', git: 'https://github.com/DataDog/omnibus-software', branch: 'isabelle.sauve/nikos'
-
 # This development group is installed by default when you run `bundle install`,
 # but if you are using Omnibus in a CI-based infrastructure, you do not need
 # the Test Kitchen-based build lab. You can skip these unnecessary dependencies

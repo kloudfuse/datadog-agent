@@ -1,5 +1,5 @@
 #
-# Copyright:: Chef Software, Inc.
+# Copyright 2019 Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,28 +14,26 @@
 # limitations under the License.
 #
 
-name "sqlite"
-default_version "3.33.0"
+name "perl-thread-queue"
+default_version "3.13"
 
-dependency 'libedit'
-dependency 'zlib'
 
-license "Public Domain"
-skip_transitive_dependency_licensing true
-
-version("3.33.0") do
-  source url: "https://www.sqlite.org/2020/sqlite-autoconf-3330000.tar.gz",
-         sha256: "106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15"
+version "3.13" do
+  source sha256: "6ba3dacddd2fbb66822b4aa1d11a0a5273cd04c825cb3ff31c20d7037cbfdce8"
 end
 
-relative_path "sqlite-autoconf-3330000"
+source url: "http://search.cpan.org/CPAN/authors/id/J/JD/JDHEDDEN/Thread-Queue-#{version}.tar.gz"
+
+relative_path "Thread-Queue-#{version}"
 
 build do
-  env = with_standard_compiler_flags(with_embedded_path)
+  env = with_standard_compiler_flags(with_embedded_path).merge(
+    "INSTALL_BASE" => "#{install_dir}/embedded"
+  )
 
-  configure_options = []
-  configure(*configure_options, env: env)
+  command "cp /usr/bin/perl #{install_dir}/embedded/bin/perl"
+  command "#{install_dir}/embedded/bin/perl Makefile.PL", env: env
 
-  make "-j #{workers}", env: env
+  make env: env
   make "install", env: env
 end

@@ -14,26 +14,29 @@
 # limitations under the License.
 #
 
-name "sqlite"
-default_version "3.33.0"
+name "libgcrypt"
+default_version "1.8.6"
 
-dependency 'libedit'
-dependency 'zlib'
-
-license "Public Domain"
+license "LGPL-2.1"
+license_file "COPYING.LIB"
 skip_transitive_dependency_licensing true
 
-version("3.33.0") do
-  source url: "https://www.sqlite.org/2020/sqlite-autoconf-3330000.tar.gz",
-         sha256: "106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15"
-end
+dependency "libgpg-error"
 
-relative_path "sqlite-autoconf-3330000"
+version("1.8.6") { source sha256: "0cba2700617b99fc33864a0c16b1fa7fdf9781d9ed3509f5d767178e5fd7b975" }
+
+source url: "https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-#{version}.tar.bz2"
+
+relative_path "libgcrypt-#{version}"
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
 
-  configure_options = []
+  configure_options = [
+    "--prefix=#{install_dir}/embedded",
+    "--enable-maintainer-mode",
+  ]
+
   configure(*configure_options, env: env)
 
   make "-j #{workers}", env: env

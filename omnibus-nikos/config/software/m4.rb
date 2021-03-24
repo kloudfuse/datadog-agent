@@ -14,28 +14,26 @@
 # limitations under the License.
 #
 
-name "sqlite"
-default_version "3.33.0"
+name "m4"
+default_version "1.4.18"
 
-dependency 'libedit'
-dependency 'zlib'
-
-license "Public Domain"
+license "GPL-3.0"
+license_file "COPYING"
 skip_transitive_dependency_licensing true
 
-version("3.33.0") do
-  source url: "https://www.sqlite.org/2020/sqlite-autoconf-3330000.tar.gz",
-         sha256: "106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15"
-end
+version("1.4.18") { source sha256: "ab2633921a5cd38e48797bf5521ad259bdc4b979078034a3b790d7fec5493fab" }
 
-relative_path "sqlite-autoconf-3330000"
+source url: "https://ftp.gnu.org/gnu/m4/m4-#{version}.tar.gz"
+
+relative_path "m4-#{version}"
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
 
-  configure_options = []
-  configure(*configure_options, env: env)
+  patch source: "m4-1.4.18-glibc-change-work-around.patch", plevel: 1, env: env if version == "1.4.18"
+
+  command "./configure --prefix=#{install_dir}/embedded", env: env
 
   make "-j #{workers}", env: env
-  make "install", env: env
+  make "-j #{workers} install", env: env
 end

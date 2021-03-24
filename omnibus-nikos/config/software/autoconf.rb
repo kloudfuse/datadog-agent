@@ -14,27 +14,31 @@
 # limitations under the License.
 #
 
-name "sqlite"
-default_version "3.33.0"
+name "autoconf"
+default_version "2.69"
 
-dependency 'libedit'
-dependency 'zlib'
-
-license "Public Domain"
+license "GPL-3.0"
+license_file "COPYING"
+license_file "COPYING.EXCEPTION"
 skip_transitive_dependency_licensing true
 
-version("3.33.0") do
-  source url: "https://www.sqlite.org/2020/sqlite-autoconf-3330000.tar.gz",
-         sha256: "106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15"
-end
+dependency "m4"
 
-relative_path "sqlite-autoconf-3330000"
+version("2.69") { source sha256: "954bd69b391edc12d6a4a51a2dd1476543da5c6bbf05a95b59dc0dd6fd4c2969" }
+
+source url: "https://ftp.gnu.org/gnu/autoconf/autoconf-#{version}.tar.gz"
+
+relative_path "autoconf-#{version}"
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
 
-  configure_options = []
-  configure(*configure_options, env: env)
+  if solaris2?
+    env["M4"] = "#{install_dir}/embedded/bin/m4"
+  end
+
+  command "./configure" \
+          " --prefix=#{install_dir}/embedded", env: env
 
   make "-j #{workers}", env: env
   make "install", env: env

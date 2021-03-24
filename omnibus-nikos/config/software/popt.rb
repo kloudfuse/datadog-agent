@@ -1,5 +1,5 @@
 #
-# Copyright:: Chef Software, Inc.
+# Copyright 2012-2014 Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,26 +14,39 @@
 # limitations under the License.
 #
 
-name "sqlite"
-default_version "3.33.0"
+name "popt"
+default_version "1.18"
 
-dependency 'libedit'
-dependency 'zlib'
-
-license "Public Domain"
+license "MIT"
+license_file "COPYING"
 skip_transitive_dependency_licensing true
 
-version("3.33.0") do
-  source url: "https://www.sqlite.org/2020/sqlite-autoconf-3330000.tar.gz",
-         sha256: "106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15"
+dependency "config_guess"
+
+version "1.18" do
+  source url: "http://ftp.rpm.org/popt/releases/popt-1.x/popt-#{version}.tar.gz",
+         sha256: "5159bc03a20b28ce363aa96765f37df99ea4d8850b1ece17d1e6ad5c24fdc5d1"
 end
 
-relative_path "sqlite-autoconf-3330000"
+version("1.16") do
+  source url: "http://ftp.rpm.org/popt/releases/historical/popt-#{version}.tar.gz",
+         sha256: "e728ed296fe9f069a0e005003c3d6b2dde3d9cad453422a10d6558616d304cc8"
+end
+
+relative_path "popt-#{version}"
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
 
-  configure_options = []
+  update_config_guess
+
+  if version == "1.16" && (ppc64? || ppc64le?)
+    patch source: "v1.16.ppc64le-configure.patch", plevel: 1
+  end
+
+  configure_options = [
+    "--disable-nls",
+  ]
   configure(*configure_options, env: env)
 
   make "-j #{workers}", env: env

@@ -14,26 +14,26 @@
 # limitations under the License.
 #
 
-name "sqlite"
-default_version "3.33.0"
+name "npth"
+default_version "1.6"
 
-dependency 'libedit'
-dependency 'zlib'
-
-license "Public Domain"
+license "LGPL-2.1"
+license_file "COPYING.LIB"
 skip_transitive_dependency_licensing true
 
-version("3.33.0") do
-  source url: "https://www.sqlite.org/2020/sqlite-autoconf-3330000.tar.gz",
-         sha256: "106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15"
-end
+version("1.6") { source sha256: "1393abd9adcf0762d34798dc34fdcf4d0d22a8410721e76f1e3afcd1daa4e2d1" }
 
-relative_path "sqlite-autoconf-3330000"
+source url: "https://www.gnupg.org/ftp/gcrypt/npth/npth-#{version}.tar.bz2"
+
+relative_path "npth-#{version}"
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
 
-  configure_options = []
+  configure_options = [
+    "--enable-maintainer-mode",
+  ]
+
   configure(*configure_options, env: env)
 
   make "-j #{workers}", env: env

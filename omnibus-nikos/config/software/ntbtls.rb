@@ -14,26 +14,26 @@
 # limitations under the License.
 #
 
-name "sqlite"
-default_version "3.33.0"
+name "ntbtls"
+default_version "0.2.0"
 
-dependency 'libedit'
-dependency 'zlib'
-
-license "Public Domain"
+license "GPLv3"
+license_file "COPYING"
 skip_transitive_dependency_licensing true
 
-version("3.33.0") do
-  source url: "https://www.sqlite.org/2020/sqlite-autoconf-3330000.tar.gz",
-         sha256: "106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15"
-end
+version("0.2.0") { source sha256: "649fe74a311d13e43b16b26ebaa91665ddb632925b73902592eac3ed30519e17" }
 
-relative_path "sqlite-autoconf-3330000"
+source url: "https://www.gnupg.org/ftp/gcrypt/ntbtls/ntbtls-#{version}.tar.bz2"
+
+relative_path "ntbtls-#{version}"
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
 
-  configure_options = []
+  configure_options = [
+    "--enable-maintainer-mode",
+  ]
+
   configure(*configure_options, env: env)
 
   make "-j #{workers}", env: env

@@ -14,26 +14,27 @@
 # limitations under the License.
 #
 
-name "sqlite"
-default_version "3.33.0"
+name "libgpg-error"
+default_version "1.39"
 
-dependency 'libedit'
-dependency 'zlib'
-
-license "Public Domain"
+license "LGPL-2.1"
+license_file "COPYING.LIB"
 skip_transitive_dependency_licensing true
 
-version("3.33.0") do
-  source url: "https://www.sqlite.org/2020/sqlite-autoconf-3330000.tar.gz",
-         sha256: "106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15"
-end
+version("1.39") { source sha256: "4a836edcae592094ef1c5a4834908f44986ab2b82e0824a0344b49df8cdb298f" }
 
-relative_path "sqlite-autoconf-3330000"
+source url: "https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-#{version}.tar.bz2"
+
+relative_path "libgpg-error-#{version}"
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
 
-  configure_options = []
+  configure_options = [
+    "--prefix=#{install_dir}/embedded",
+    "--enable-maintainer-mode",
+  ]
+
   configure(*configure_options, env: env)
 
   make "-j #{workers}", env: env

@@ -19,8 +19,6 @@ require './lib/cmake.rb'
 name "json-c"
 default_version "0.15-20200726"
 
-dependency "cmake"
-
 license "MIT"
 license_file "COPYING"
 skip_transitive_dependency_licensing true

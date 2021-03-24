@@ -14,26 +14,26 @@
 # limitations under the License.
 #
 
-name "sqlite"
-default_version "3.33.0"
+name "readline"
+default_version "8.0"
 
-dependency 'libedit'
-dependency 'zlib'
-
-license "Public Domain"
+license "GPLv3+"
+license_file "COPYING"
 skip_transitive_dependency_licensing true
 
-version("3.33.0") do
-  source url: "https://www.sqlite.org/2020/sqlite-autoconf-3330000.tar.gz",
-         sha256: "106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15"
-end
+version("8.0") { source sha256: "e339f51971478d369f8a053a330a190781acb9864cf4c541060f12078948e461" }
 
-relative_path "sqlite-autoconf-3330000"
+source url: "ftp://ftp.cwru.edu/pub/bash/readline-#{version}.tar.gz"
+
+relative_path "readline-#{version}"
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
 
-  configure_options = []
+  configure_options = [
+    "--prefix=#{install_dir}/embedded",
+  ]
+
   configure(*configure_options, env: env)
 
   make "-j #{workers}", env: env

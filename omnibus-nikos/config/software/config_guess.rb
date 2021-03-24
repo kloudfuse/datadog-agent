@@ -1,5 +1,5 @@
 #
-# Copyright:: Chef Software, Inc.
+# Copyright 2015 Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,28 +14,23 @@
 # limitations under the License.
 #
 
-name "sqlite"
-default_version "3.33.0"
+name "config_guess"
+default_version "master"
 
-dependency 'libedit'
-dependency 'zlib'
+# Use our github mirror of the savannah repository
+source git: "https://github.com/chef/config-mirror.git"
 
-license "Public Domain"
+# http://savannah.gnu.org/projects/config
+license "GPL-3.0 (with exception)"
+license_file "config.guess"
+license_file "config.sub"
 skip_transitive_dependency_licensing true
 
-version("3.33.0") do
-  source url: "https://www.sqlite.org/2020/sqlite-autoconf-3330000.tar.gz",
-         sha256: "106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15"
-end
-
-relative_path "sqlite-autoconf-3330000"
+relative_path "config_guess-#{version}"
 
 build do
-  env = with_standard_compiler_flags(with_embedded_path)
+  mkdir "#{install_dir}/embedded/lib/config_guess"
 
-  configure_options = []
-  configure(*configure_options, env: env)
-
-  make "-j #{workers}", env: env
-  make "install", env: env
+  copy "#{project_dir}/config.guess", "#{install_dir}/embedded/lib/config_guess/config.guess"
+  copy "#{project_dir}/config.sub", "#{install_dir}/embedded/lib/config_guess/config.sub"
 end
