@@ -460,7 +460,7 @@ func TestSubmitEventPlatformEvent(t *testing.T) {
 		expectedOut string
 	}{
 		{
-			"None, 'id', 'raw-event', 'dev-track'",
+			"None, 'id', 'raw-event', 'dbm-sample'",
 			"",
 		},
 		{

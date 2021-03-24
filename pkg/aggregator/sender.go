@@ -35,7 +35,7 @@ type Sender interface {
 	ServiceCheck(checkName string, status metrics.ServiceCheckStatus, hostname string, tags []string, message string)
 	HistogramBucket(metric string, value int64, lowerBound, upperBound float64, monotonic bool, hostname string, tags []string)
 	Event(e metrics.Event)
-	EventPlatformEvent(rawEvent string, track string)
+	EventPlatformEvent(rawEvent string, eventType string)
 	GetMetricStats() map[string]int64
 	DisableDefaultHostname(disable bool)
 	SetCheckCustomTags(tags []string)
@@ -90,7 +90,7 @@ type senderHistogramBucket struct {
 type SenderEventPlatformEvent struct {
 	Id                check.ID
 	RawEvent          string `json:",omitempty"`
-	Track             string
+	EventType         string
 	UnmarshalledEvent map[string]interface{} `json:",omitempty"`
 }
 
@@ -403,11 +403,11 @@ func (s *checkSender) Event(e metrics.Event) {
 }
 
 // Event submits an event
-func (s *checkSender) EventPlatformEvent(rawEvent string, track string) {
+func (s *checkSender) EventPlatformEvent(rawEvent string, eventType string) {
 	s.eventPlatformOut <- SenderEventPlatformEvent{
-		Id:       s.id,
-		RawEvent: rawEvent,
-		Track:    track,
+		Id:        s.id,
+		RawEvent:  rawEvent,
+		EventType: eventType,
 	}
 }
 

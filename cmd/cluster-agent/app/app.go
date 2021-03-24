@@ -219,9 +219,9 @@ func start(cmd *cobra.Command, args []string) error {
 	if orchestratorForwarder != nil {
 		orchestratorForwarder.Start() //nolint:errcheck
 	}
-	s := serializer.NewSerializer(f, orchestratorForwarder, nil)
+	s := serializer.NewSerializer(f, orchestratorForwarder)
 
-	aggregatorInstance := aggregator.InitAggregator(s, hostname)
+	aggregatorInstance := aggregator.InitAggregator(s,nil, hostname)
 	aggregatorInstance.AddAgentStartupTelemetry(fmt.Sprintf("%s - Datadog Cluster Agent", version.AgentVersion))
 
 	le, err := leaderelection.GetLeaderEngine()

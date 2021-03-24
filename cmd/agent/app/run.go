@@ -346,14 +346,14 @@ func StartAgent() error {
 		orchestratorForwarder.Start() //nolint:errcheck
 	}
 
-	common.EventPlatformForwarder = epforwarder.NewEventPlatformForwarder(false)
+	common.EventPlatformForwarder = epforwarder.NewEventPlatformForwarder()
 	if common.EventPlatformForwarder != nil {
 		common.EventPlatformForwarder.Start()
 	}
 
 	// setup the aggregator
-	s := serializer.NewSerializer(common.Forwarder, orchestratorForwarder, common.EventPlatformForwarder)
-	agg := aggregator.InitAggregator(s, hostname)
+	s := serializer.NewSerializer(common.Forwarder, orchestratorForwarder)
+	agg := aggregator.InitAggregator(s, common.EventPlatformForwarder, hostname)
 	agg.AddAgentStartupTelemetry(version.AgentVersion)
 
 	// start dogstatsd

@@ -7,6 +7,7 @@ package sender
 
 import (
 	"context"
+	"github.com/DataDog/datadog-agent/pkg/util/log"
 	"sync"
 
 	"github.com/DataDog/datadog-agent/pkg/logs/client"
@@ -73,6 +74,7 @@ func (s *Sender) send(payload []byte) error {
 	for {
 		err := s.destinations.Main.Send(payload)
 		if err != nil {
+			log.Debug("SENDER SENDING FAILED")
 			metrics.DestinationErrors.Add(1)
 			metrics.TlmDestinationErrors.Inc()
 			if _, ok := err.(*client.RetryableError); ok {
@@ -81,6 +83,8 @@ func (s *Sender) send(payload []byte) error {
 				continue
 			}
 			return err
+		} else {
+			log.Debug("SENDER SENDING SUCCESS: %s", string(payload))
 		}
 		break
 	}

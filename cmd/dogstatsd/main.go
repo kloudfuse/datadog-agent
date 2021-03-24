@@ -181,7 +181,7 @@ func runAgent(ctx context.Context) (err error) {
 	}
 	f := forwarder.NewDefaultForwarder(forwarder.NewOptions(keysPerDomain))
 	f.Start() //nolint:errcheck
-	s := serializer.NewSerializer(f, nil, nil)
+	s := serializer.NewSerializer(f, nil)
 
 	hname, err := util.GetHostname()
 	if err != nil {
@@ -209,7 +209,7 @@ func runAgent(ctx context.Context) (err error) {
 		tagger.Init()
 	}
 
-	aggregatorInstance := aggregator.InitAggregator(s, hname)
+	aggregatorInstance := aggregator.InitAggregator(s,nil, hname)
 
 	statsd, err = dogstatsd.NewServer(aggregatorInstance, nil)
 	if err != nil {

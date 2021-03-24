@@ -166,9 +166,9 @@ func run(cmd *cobra.Command, args []string) error {
 	}
 	f := forwarder.NewDefaultForwarder(forwarder.NewOptions(keysPerDomain))
 	f.Start() //nolint:errcheck
-	s := serializer.NewSerializer(f, nil, nil)
+	s := serializer.NewSerializer(f, nil)
 
-	aggregatorInstance := aggregator.InitAggregator(s, hostname)
+	aggregatorInstance := aggregator.InitAggregator(s,nil, hostname)
 	aggregatorInstance.AddAgentStartupTelemetry(fmt.Sprintf("%s - Datadog Cluster Agent", version.AgentVersion))
 
 	log.Infof("Datadog Cluster Agent is now running.")

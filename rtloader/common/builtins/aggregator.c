@@ -425,13 +425,13 @@ static PyObject *submit_event_platform_event(PyObject *self, PyObject *args)
     PyObject *check = NULL;
     char *check_id = NULL;
     char *raw_event = NULL;
-    char *track = NULL;
+    char *event_type = NULL;
 
-    if (!PyArg_ParseTuple(args, "Osss", &check, &check_id, &raw_event, &track)) {
+    if (!PyArg_ParseTuple(args, "Osss", &check, &check_id, &raw_event, &event_type)) {
         goto error;
     }
 
-    cb_submit_event_platform_event(check_id, raw_event, track);
+    cb_submit_event_platform_event(check_id, raw_event, event_type);
     PyGILState_Release(gstate);
     Py_RETURN_NONE;
 

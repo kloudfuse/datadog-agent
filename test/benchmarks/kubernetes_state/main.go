@@ -202,7 +202,7 @@ func main() {
 	 * As it has a `nil` serializer, it will panic if it tries to flush the metrics.
 	 * That’s why we need a big enough flush interval
 	 */
-	aggregator.InitAggregatorWithFlushInterval(nil, "", 1*time.Hour)
+	aggregator.InitAggregatorWithFlushInterval(nil,nil, "", 1*time.Hour)
 
 	/*
 	 * Wait for informers to get populated
