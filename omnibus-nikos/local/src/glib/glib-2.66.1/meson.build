@@ -1936,11 +1936,7 @@ else
   endif
 endif
 
-if get_option('internal_pcre')
-  pcre = []
-  use_system_pcre = false
-else
-  pcre = dependency('libpcre', version: '>= 8.31', required : false, method : 'pkg-config') # Should check for Unicode support, too. FIXME
+  pcre = dependency('libpcre', version: '>= 8.31', required : true, method : 'pkg-config')
   if not pcre.found()
     if cc.get_id() == 'msvc' or cc.get_id() == 'clang-cl'
     # MSVC: Search for the PCRE library by the configuration, which corresponds
@@ -1954,7 +1950,6 @@ else
     endif
   endif
   use_system_pcre = pcre.found()
-endif
 glib_conf.set('USE_SYSTEM_PCRE', use_system_pcre)
 
 use_pcre_static_flag = false
