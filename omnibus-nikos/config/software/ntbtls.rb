@@ -21,6 +21,10 @@ license "GPLv3"
 license_file "COPYING"
 skip_transitive_dependency_licensing true
 
+dependency "libgpg-error"
+dependency "libgcrypt"
+dependency "libksba"
+
 version("0.2.0") { source sha256: "649fe74a311d13e43b16b26ebaa91665ddb632925b73902592eac3ed30519e17" }
 
 source url: "https://www.gnupg.org/ftp/gcrypt/ntbtls/ntbtls-#{version}.tar.bz2"
