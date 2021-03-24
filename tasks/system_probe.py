@@ -590,13 +590,10 @@ def build_security_ebpf_files(ctx, build_dir):
 
 def build_bcc_files(ctx, build_dir):
     corechecks_c_dir = os.path.join(".", "pkg", "collector", "corechecks", "ebpf", "c")
-    corechecks_bcc_dir = os.path.join(corechecks_c_dir, "bcc")
     bcc_files = [
-        os.path.join(corechecks_bcc_dir, "tcp-queue-length-kern.c"),
-        os.path.join(corechecks_c_dir, "tcp-queue-length-kern-user.h"),
-        os.path.join(corechecks_bcc_dir, "oom-kill-kern.c"),
+        os.path.join(corechecks_c_dir, "oom-kill-kern.c"),
         os.path.join(corechecks_c_dir, "oom-kill-kern-user.h"),
-        os.path.join(corechecks_bcc_dir, "bpf-common.h"),
+        os.path.join(corechecks_c_dir, "bpf-common.h"),
     ]
     for f in bcc_files:
         ctx.run("cp {file} {dest}".format(file=f, dest=build_dir))
