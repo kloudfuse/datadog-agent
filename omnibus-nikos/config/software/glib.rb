@@ -34,6 +34,8 @@ relative_path "glib-#{version}"
 build do
   env = with_standard_compiler_flags(with_embedded_path)
 
+  patch source: "0001-Set-dependency-method-to-pkg-config.patch", env: env
+
   meson_command = [
     "meson",
     "_build",

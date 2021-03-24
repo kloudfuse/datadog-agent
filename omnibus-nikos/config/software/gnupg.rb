@@ -26,8 +26,8 @@ dependency 'ntbtls'
 dependency 'zlib'
 dependency 'bzip2'
 dependency 'sqlite'
-dependency 'readline'
 dependency 'ncurses'
+dependency 'readline'
 
 license "LGPL-2.1"
 license_file "COPYING.LGPL21"
