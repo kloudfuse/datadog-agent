@@ -34,24 +34,17 @@ relative_path "glib-#{version}"
 build do
   env = with_standard_compiler_flags(with_embedded_path)
 
-  meson_command = [ 
-    "meson _build",
+  meson_command = [
+    "meson",
+    "_build",
     "--prefix=#{install_dir}/embedded",
     "--libdir=lib",
-    "-Dpkg_config_path=/opt/nikos/embedded/lib/pkgconfig",
     "-Dlibmount=disabled",
     "-Dselinux=disabled",
-    "-Dxattr=false",
-    "-Dsystemtap=false",
-    "-Ddtrace=false",
-    "-Db_coverage=false",
-    "-Dbsymbolic_functions=false"
   ]
 
   command meson_command.join(" "), env: env
 
   command "ninja -C _build", env: env
   command "ninja -C _build install", env: env
-
-  # DELETE THE BINARIES
 end
