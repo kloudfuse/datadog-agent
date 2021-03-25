@@ -395,6 +395,7 @@ func TestCheckSenderInterface(t *testing.T) {
 	s.sender.HistogramBucket("my.histogram_bucket", 42, 1.0, 2.0, true, "my-hostname", []string{"foo", "bar"})
 	s.sender.Commit()
 	s.sender.ServiceCheck("my_service.can_connect", metrics.ServiceCheckOK, "my-hostname", []string{"foo", "bar"}, "message")
+	s.sender.EventPlatformEvent("raw-event", "dbm-sample")
 	submittedEvent := metrics.Event{
 		Title:          "Something happened",
 		Text:           "Description of the event",
@@ -467,6 +468,11 @@ func TestCheckSenderInterface(t *testing.T) {
 	assert.Equal(t, true, histogramBucket.bucket.Monotonic)
 	assert.Equal(t, "my-hostname", histogramBucket.bucket.Host)
 	assert.Equal(t, []string{"foo", "bar"}, histogramBucket.bucket.Tags)
+
+	eventPlatformEvent := <-s.eventPlatformEventChan
+	assert.Equal(t, checkID1, eventPlatformEvent.Id)
+	assert.Equal(t, "raw-event", eventPlatformEvent.RawEvent)
+	assert.Equal(t, "dbm-sample", eventPlatformEvent.EventType)
 }
 
 func TestCheckSenderHostname(t *testing.T) {
