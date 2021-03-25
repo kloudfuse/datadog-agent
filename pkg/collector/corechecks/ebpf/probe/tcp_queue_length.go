@@ -148,10 +148,19 @@ func (t *TCPQueueLengthTracer) Get() TCPQueueLengthStats {
 
 func (t *TCPQueueLengthTracer) GetAndFlush() TCPQueueLengthStats {
 	result := t.Get()
+
+	cpus, err := cpupossible.Get()
+	if err != nil {
+		log.Errorf("Failed to get online CPUs: %v", err)
+		return TCPQueueLengthStats{}
+	}
+	nbCpus := len(cpus)
+
 	var statsKey C.struct_stats_key
+	statsValue := make([]C.struct_stats_value, nbCpus)
 	it := t.statsMap.Iterate()
-	for it.Next(unsafe.Pointer(&statsKey), nil) {
-		if err := t.statsMap.Delete(statsKey); err != nil {
+	for it.Next(unsafe.Pointer(&statsKey), unsafe.Pointer(&statsValue[0])) {
+		if err := t.statsMap.Delete(&statsKey); err != nil {
 			log.Warnf("failed to delete stat: %s", err)
 		}
 	}

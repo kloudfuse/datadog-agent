@@ -104,6 +104,7 @@ int kprobe__tcp_recvmsg(struct pt_regs* ctx) {
     bpf_probe_read(&sk, sizeof(sk),(void*) ctx->di);
     u64 pid_tgid = bpf_get_current_pid_tgid();
     bpf_map_update_elem(&who_recvmsg, &pid_tgid, &sk, BPF_ANY);
+
     return check_sock(sk);
 }
 

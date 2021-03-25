@@ -1,84 +1,129 @@
-// +build linux_bpf,bcc
+// +build linux_bpf
+
+//go:generate go run ../../../../ebpf/include_headers.go ../c/runtime/oom-kill-kern.c ../../../../ebpf/bytecode/build/runtime/oom-kill.c ../../../../ebpf/c
+//go:generate go run ../../../../ebpf/bytecode/runtime/integrity.go ../../../../ebpf/bytecode/build/runtime/oom-kill.c ../../../../ebpf/bytecode/runtime/oom-kill.go runtime
 
 package probe
 
 import (
 	"fmt"
+	"math"
 	"unsafe"
 
-	"github.com/DataDog/datadog-agent/pkg/ebpf"
-	"github.com/DataDog/datadog-agent/pkg/util/log"
+	"github.com/pkg/errors"
+	"golang.org/x/sys/unix"
 
-	bpflib "github.com/iovisor/gobpf/bcc"
+	bpflib "github.com/DataDog/ebpf"
+	"github.com/DataDog/ebpf/manager"
+
+	"github.com/DataDog/datadog-agent/pkg/ebpf"
+	"github.com/DataDog/datadog-agent/pkg/ebpf/bytecode/runtime"
+	"github.com/DataDog/datadog-agent/pkg/util/log"
 )
 
 /*
 #include <string.h>
-#include "../c/oom-kill-kern-user.h"
+#include "../c/runtime/oom-kill-kern-user.h"
 */
 import "C"
 
+const oomMapName = "oom_stats"
+
 type OOMKillProbe struct {
-	m      *bpflib.Module
-	oomMap *bpflib.Table
+	m      *manager.Manager
+	oomMap *bpflib.Map
 }
 
 func NewOOMKillProbe(cfg *ebpf.Config) (*OOMKillProbe, error) {
-	source, err := ebpf.PreprocessFile(cfg.BPFDir, "oom-kill-kern.c")
+	compiledOutput, err := runtime.OomKill.Compile(cfg, nil)
 	if err != nil {
-		return nil, fmt.Errorf("Couldn’t process headers for asset “oom-kill-kern.c”: %v", err)
+		return nil, err
+	}
+	defer compiledOutput.Close()
+
+	probes := []*manager.Probe{
+		&manager.Probe{
+			Section: "kprobe/oom_kill_process",
+		},
 	}
 
-	m := bpflib.NewModule(source.String(), []string{})
-	if m == nil {
-		return nil, fmt.Errorf("failed to compile “oom-kill-kern.c”")
+	maps := []*manager.Map{
+		{Name: "oom_stats"},
 	}
 
-	kprobe, err := m.LoadKprobe("kprobe__oom_kill_process")
+	m := &manager.Manager{
+		Probes: probes,
+		Maps:   maps,
+	}
+
+	managerOptions := manager.Options{
+		RLimit: &unix.Rlimit{
+			Cur: math.MaxUint64,
+			Max: math.MaxUint64,
+		},
+	}
+
+	if err := m.InitWithOptions(compiledOutput, managerOptions); err != nil {
+		return nil, errors.Wrap(err, "failed to init manager")
+	}
+
+	if err := m.Start(); err != nil {
+		return nil, errors.Wrap(err, "failed to start manager")
+	}
+
+	oomMap, ok, err := m.GetMap(oomMapName)
 	if err != nil {
-		return nil, fmt.Errorf("failed to load kprobe__oom_kill_process: %s\n", err)
+		return nil, err
+	} else if !ok {
+		return nil, fmt.Errorf("failed to get map '%s'", statsMapName)
 	}
-
-	if err := m.AttachKprobe("oom_kill_process", kprobe, -1); err != nil {
-		return nil, fmt.Errorf("failed to attach oom_kill_process: %s\n", err)
-	}
-
-	table := bpflib.NewTable(m.TableId("oomStats"), m)
 
 	return &OOMKillProbe{
 		m:      m,
-		oomMap: table,
+		oomMap: oomMap,
 	}, nil
 }
 
 func (k *OOMKillProbe) Close() {
-	k.m.Close()
+	k.m.Stop(manager.CleanAll)
 }
 
 func (k *OOMKillProbe) GetAndFlush() []OOMKillStats {
 	results := k.Get()
-	k.oomMap.DeleteAll()
+	var pid uint32
+	var stat C.struct_oom_stats
+	it := k.oomMap.Iterate()
+	for it.Next(&pid, unsafe.Pointer(&stat)) {
+		if err := k.oomMap.Delete(&pid); err != nil {
+			log.Warnf("failed to delete stat: %s", err)
+		}
+	}
+
+	if err := it.Err(); err != nil {
+		log.Warnf("failed to iterate on OOM stats while flushing: %s", err)
+	}
+
 	return results
 }
 
-func (k *OOMKillProbe) Get() []OOMKillStats {
+func (k *OOMKillProbe) Get() (results []OOMKillStats) {
 	if k == nil {
 		return nil
 	}
 
-	var results []OOMKillStats
-
-	for it := k.oomMap.Iter(); it.Next(); {
-		var stat C.struct_oom_stats
-
-		data := it.Leaf()
-		C.memcpy(unsafe.Pointer(&stat), unsafe.Pointer(&data[0]), C.sizeof_struct_oom_stats)
-
+	var pid uint32
+	var stat C.struct_oom_stats
+	it := k.oomMap.Iterate()
+	for it.Next(&pid, unsafe.Pointer(&stat)) {
 		results = append(results, convertStats(stat))
 	}
 
+	if err := it.Err(); err != nil {
+		log.Warnf("failed to iterate on OOM stats: %s", err)
+	}
+
 	log.Debugf("OOM Kill stats gathered from kernel probe: %v", results)
-	return results
+	return
 }
 
 func convertStats(in C.struct_oom_stats) (out OOMKillStats) {
