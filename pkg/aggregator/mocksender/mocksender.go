@@ -61,6 +61,7 @@ func (m *MockSender) SetupAcceptAll() {
 		mock.AnythingOfType("string"),                     // message
 	).Return()
 	m.On("Event", mock.AnythingOfType("metrics.Event")).Return()
+	m.On("EventPlatformEvent", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return()
 	m.On("HistogramBucket",
 		mock.AnythingOfType("string"),   // metric name
 		mock.AnythingOfType("int64"),    // value
