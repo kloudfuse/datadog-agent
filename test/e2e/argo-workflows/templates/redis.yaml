@@ -48,9 +48,9 @@ spec:
                 labels:
                   app: redis
                 annotations:
-                  ad.datadoghq.com/redis.check_names: '["redisdb"]'
-                  ad.datadoghq.com/redis.init_configs: '[{}]'
-                  ad.datadoghq.com/redis.instances: '[{"host": "%%host%%", "port": "%%port%%"}]'
+                  ad.kloudfuse.com/redis.check_names: '["redisdb"]'
+                  ad.kloudfuse.com/redis.init_configs: '[{}]'
+                  ad.kloudfuse.com/redis.instances: '[{"host": "%%host%%", "port": "%%port%%"}]'
               spec:
                 initContainers:
                 - name: useless
@@ -100,7 +100,7 @@ spec:
                 labels:
                   app: redis
                 annotations:
-                  ad.datadoghq.com/tolerate-unready: "true"
+                  ad.kloudfuse.com/tolerate-unready: "true"
               spec:
                 containers:
                 - name: redis-unready

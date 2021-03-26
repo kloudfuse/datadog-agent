@@ -868,7 +868,7 @@ func TestGetStatusForContainerID(t *testing.T) {
 			Namespace: "podNamespace",
 			UID:       "podUID",
 			Annotations: map[string]string{
-				"ad.datadoghq.com/fooName.logs": `[{"source":"any_source","service":"any_service","tags":["tag1","tag2"]}]`,
+				"ad.kloudfuse.com/fooName.logs": `[{"source":"any_source","service":"any_service","tags":["tag1","tag2"]}]`,
 			},
 		},
 		Status: Status{

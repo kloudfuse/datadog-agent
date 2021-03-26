@@ -28,7 +28,7 @@ const (
 	kubeletMetricsPath     = "/metrics"
 	authorizationHeaderKey = "Authorization"
 	podListCacheKey        = "KubeletPodListCacheKey"
-	unreadyAnnotation      = "ad.datadoghq.com/tolerate-unready"
+	unreadyAnnotation      = "ad.kloudfuse.com/tolerate-unready"
 	configSourceAnnotation = "kubernetes.io/config.source"
 )
 

@@ -20,9 +20,9 @@ spec:
         app: datadog-cluster-agent
       name: datadog-cluster-agent
       annotations:
-        ad.datadoghq.com/cluster-agent.check_names: '["prometheus"]'
-        ad.datadoghq.com/cluster-agent.init_configs: '[{}]'
-        ad.datadoghq.com/cluster-agent.instances: |
+        ad.kloudfuse.com/cluster-agent.check_names: '["prometheus"]'
+        ad.kloudfuse.com/cluster-agent.init_configs: '[{}]'
+        ad.kloudfuse.com/cluster-agent.instances: |
           [{
             "prometheus_url": "http://%%host%%:5000/metrics",
             "namespace": "datadog.cluster_agent",

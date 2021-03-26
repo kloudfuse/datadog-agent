@@ -40,9 +40,9 @@ func TestParseKubeServiceAnnotationsForEndpoints(t *testing.T) {
 				ObjectMeta: metav1.ObjectMeta{
 					UID: types.UID("test"),
 					Annotations: map[string]string{
-						"ad.datadoghq.com/endpoints.check_names":  "[\"http_check\"]",
-						"ad.datadoghq.com/endpoints.init_configs": "[{}]",
-						"ad.datadoghq.com/endpoints.instances":    "[{\"name\": \"My endpoint\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
+						"ad.kloudfuse.com/endpoints.check_names":  "[\"http_check\"]",
+						"ad.kloudfuse.com/endpoints.init_configs": "[{}]",
+						"ad.kloudfuse.com/endpoints.instances":    "[{\"name\": \"My endpoint\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
 					},
 					Name:      "myservice",
 					Namespace: "default",
@@ -69,10 +69,10 @@ func TestParseKubeServiceAnnotationsForEndpoints(t *testing.T) {
 				ObjectMeta: metav1.ObjectMeta{
 					UID: types.UID("test"),
 					Annotations: map[string]string{
-						"ad.datadoghq.com/endpoints.check_names":               "[\"http_check\"]",
-						"ad.datadoghq.com/endpoints.init_configs":              "[{}]",
-						"ad.datadoghq.com/endpoints.instances":                 "[{\"name\": \"My endpoint\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
-						"ad.datadoghq.com/endpoints.ignore_autodiscovery_tags": "true",
+						"ad.kloudfuse.com/endpoints.check_names":               "[\"http_check\"]",
+						"ad.kloudfuse.com/endpoints.init_configs":              "[{}]",
+						"ad.kloudfuse.com/endpoints.instances":                 "[{\"name\": \"My endpoint\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
+						"ad.kloudfuse.com/endpoints.ignore_autodiscovery_tags": "true",
 					},
 					Name:      "myservice",
 					Namespace: "default",
@@ -297,9 +297,9 @@ func TestInvalidateIfChangedService(t *testing.T) {
 		ObjectMeta: metav1.ObjectMeta{
 			ResourceVersion: "89",
 			Annotations: map[string]string{
-				"ad.datadoghq.com/endpoints.check_names":  "[\"http_check\"]",
-				"ad.datadoghq.com/endpoints.init_configs": "[{}]",
-				"ad.datadoghq.com/endpoints.instances":    "[{\"name\": \"My endpoint\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
+				"ad.kloudfuse.com/endpoints.check_names":  "[\"http_check\"]",
+				"ad.kloudfuse.com/endpoints.init_configs": "[{}]",
+				"ad.kloudfuse.com/endpoints.instances":    "[{\"name\": \"My endpoint\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
 			},
 		},
 	}
@@ -307,9 +307,9 @@ func TestInvalidateIfChangedService(t *testing.T) {
 		ObjectMeta: metav1.ObjectMeta{
 			ResourceVersion: "90",
 			Annotations: map[string]string{
-				"ad.datadoghq.com/endpoints.check_names":  "[\"http_check\"]",
-				"ad.datadoghq.com/endpoints.init_configs": "[{}]",
-				"ad.datadoghq.com/endpoints.instances":    "[{\"name\": \"My endpoint\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
+				"ad.kloudfuse.com/endpoints.check_names":  "[\"http_check\"]",
+				"ad.kloudfuse.com/endpoints.init_configs": "[{}]",
+				"ad.kloudfuse.com/endpoints.instances":    "[{\"name\": \"My endpoint\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
 			},
 		},
 	}

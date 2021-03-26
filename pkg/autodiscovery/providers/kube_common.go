@@ -13,7 +13,7 @@ import "strings"
 const ignoreADTagsAnnotationSuffix = "ignore_autodiscovery_tags"
 
 // ignoreADTagsFromAnnotations returns whether the check should have autodiscovery tags from the service (e.g kube_namespace)
-// based on the value of the annotation ad.datadoghq.com/ignore_autodiscovery_tags
+// based on the value of the annotation ad.kloudfuse.com/ignore_autodiscovery_tags
 func ignoreADTagsFromAnnotations(annotations map[string]string, prefix string) bool {
 	if annotations == nil {
 		return false

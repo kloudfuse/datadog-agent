@@ -17,9 +17,9 @@
                     "pod-template-hash": "2579813091"
                 },
                 "annotations": {
-                    "ad.datadoghq.com/redis-unready.check_names": "[\"redisdb\"]",
-                    "ad.datadoghq.com/redis-unready.init_configs": "[{}]",
-                    "ad.datadoghq.com/redis-unready.instances": "[{\"host\": \"%%host%%\", \"port\": \"%%port%%\"}]",
+                    "ad.kloudfuse.com/redis-unready.check_names": "[\"redisdb\"]",
+                    "ad.kloudfuse.com/redis-unready.init_configs": "[{}]",
+                    "ad.kloudfuse.com/redis-unready.instances": "[{\"host\": \"%%host%%\", \"port\": \"%%port%%\"}]",
                     "kubernetes.io/config.seen": "2019-06-03T14:05:56.415340087Z",
                     "kubernetes.io/config.source": "api"
                 },

@@ -28,7 +28,7 @@ import (
 )
 
 const (
-	kubeEndpointsAnnotationFormat = "ad.datadoghq.com/endpoints.instances"
+	kubeEndpointsAnnotationFormat = "ad.kloudfuse.com/endpoints.instances"
 	leaderAnnotation              = "control-plane.alpha.kubernetes.io/leader"
 )
 

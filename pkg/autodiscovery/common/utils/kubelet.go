@@ -8,7 +8,7 @@ package utils
 import "fmt"
 
 const (
-	checkIDAnnotationFormat = "ad.datadoghq.com/%s.check.id"
+	checkIDAnnotationFormat = "ad.kloudfuse.com/%s.check.id"
 )
 
 // GetCustomCheckID returns whether there is a custom check ID for a given container based on the pod annotations

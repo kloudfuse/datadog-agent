@@ -37,9 +37,9 @@ func TestParseKubeServiceAnnotations(t *testing.T) {
 				ObjectMeta: metav1.ObjectMeta{
 					UID: types.UID("test"),
 					Annotations: map[string]string{
-						"ad.datadoghq.com/service.check_names":  "[\"http_check\"]",
-						"ad.datadoghq.com/service.init_configs": "[{}]",
-						"ad.datadoghq.com/service.instances":    "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
+						"ad.kloudfuse.com/service.check_names":  "[\"http_check\"]",
+						"ad.kloudfuse.com/service.init_configs": "[{}]",
+						"ad.kloudfuse.com/service.instances":    "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
 					},
 				},
 			},
@@ -61,10 +61,10 @@ func TestParseKubeServiceAnnotations(t *testing.T) {
 				ObjectMeta: metav1.ObjectMeta{
 					UID: types.UID("test"),
 					Annotations: map[string]string{
-						"ad.datadoghq.com/service.check_names":               "[\"http_check\"]",
-						"ad.datadoghq.com/service.init_configs":              "[{}]",
-						"ad.datadoghq.com/service.instances":                 "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
-						"ad.datadoghq.com/service.ignore_autodiscovery_tags": "true",
+						"ad.kloudfuse.com/service.check_names":               "[\"http_check\"]",
+						"ad.kloudfuse.com/service.init_configs":              "[{}]",
+						"ad.kloudfuse.com/service.instances":                 "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
+						"ad.kloudfuse.com/service.ignore_autodiscovery_tags": "true",
 					},
 				},
 			},
@@ -98,9 +98,9 @@ func TestInvalidateIfChanged(t *testing.T) {
 		ObjectMeta: metav1.ObjectMeta{
 			ResourceVersion: "89",
 			Annotations: map[string]string{
-				"ad.datadoghq.com/service.check_names":  "[\"http_check\"]",
-				"ad.datadoghq.com/service.init_configs": "[{}]",
-				"ad.datadoghq.com/service.instances":    "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
+				"ad.kloudfuse.com/service.check_names":  "[\"http_check\"]",
+				"ad.kloudfuse.com/service.init_configs": "[{}]",
+				"ad.kloudfuse.com/service.instances":    "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
 			},
 		},
 	}
@@ -108,9 +108,9 @@ func TestInvalidateIfChanged(t *testing.T) {
 		ObjectMeta: metav1.ObjectMeta{
 			ResourceVersion: "90",
 			Annotations: map[string]string{
-				"ad.datadoghq.com/service.check_names":  "[\"http_check\"]",
-				"ad.datadoghq.com/service.init_configs": "[{}]",
-				"ad.datadoghq.com/service.instances":    "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
+				"ad.kloudfuse.com/service.check_names":  "[\"http_check\"]",
+				"ad.kloudfuse.com/service.init_configs": "[{}]",
+				"ad.kloudfuse.com/service.instances":    "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
 			},
 		},
 	}

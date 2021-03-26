@@ -29,7 +29,7 @@ import (
 type endpointResolveMode string
 
 const (
-	kubeEndpointAnnotationPrefix = "ad.datadoghq.com/endpoints."
+	kubeEndpointAnnotationPrefix = "ad.kloudfuse.com/endpoints."
 	kubeEndpointResolvePath      = "resolve"
 
 	kubeEndpointResolveAuto endpointResolveMode = "auto"

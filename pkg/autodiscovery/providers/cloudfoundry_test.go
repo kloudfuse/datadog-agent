@@ -94,7 +94,7 @@ func TestCloudFoundryConfigProvider_Collect(t *testing.T) {
 			expected: []integration.Config{},
 		},
 		{
-			// inputs with no AD_DATADOGHQ_COM set up => no configs
+			// inputs with no AD.KLOUDFUSE.COM set up => no configs
 			tc: "no_ad_config",
 			aLRP: map[string][]*cloudfoundry.ActualLRP{
 				"processguid1": {{ProcessGUID: "processguid1", CellID: "cellX", Index: 0}, {ProcessGUID: "processguid1", CellID: "cellY", Index: 1}},
@@ -105,7 +105,7 @@ func TestCloudFoundryConfigProvider_Collect(t *testing.T) {
 			expected: []integration.Config{},
 		},
 		{
-			// inputs with AD_DATADOGHQ_COM containing config only for containers, but no containers of the app exist
+			// inputs with AD.KLOUDFUSE.COM containing config only for containers, but no containers of the app exist
 			tc: "ad_config_present_but_no_containers_running",
 			aLRP: map[string][]*cloudfoundry.ActualLRP{
 				"processguid1": {{ProcessGUID: "processguid1", CellID: "cellX", Index: 0}, {ProcessGUID: "processguid1", CellID: "cellY", Index: 1}},
@@ -124,7 +124,7 @@ func TestCloudFoundryConfigProvider_Collect(t *testing.T) {
 			expected: []integration.Config{},
 		},
 		{
-			// inputs with AD_DATADOGHQ_COM containing config only for containers, 1 container exists for the app
+			// inputs with AD.KLOUDFUSE.COM containing config only for containers, 1 container exists for the app
 			tc: "ad_config_present_1_container_running",
 			aLRP: map[string][]*cloudfoundry.ActualLRP{
 				"processguid1":          {{ProcessGUID: "processguid1", CellID: "cellX", Index: 0}},
@@ -154,7 +154,7 @@ func TestCloudFoundryConfigProvider_Collect(t *testing.T) {
 			},
 		},
 		{
-			// inputs with AD_DATADOGHQ_COM containing config only for containers, 2 containers exist for the app
+			// inputs with AD.KLOUDFUSE.COM containing config only for containers, 2 containers exist for the app
 			tc: "ad_config_present_2_containers_running",
 			aLRP: map[string][]*cloudfoundry.ActualLRP{
 				"processguid1":          {{ProcessGUID: "processguid1", CellID: "cellX", Index: 0}, {ProcessGUID: "processguid1", CellID: "cellY", Index: 1}},
@@ -193,7 +193,7 @@ func TestCloudFoundryConfigProvider_Collect(t *testing.T) {
 			},
 		},
 		{
-			// inputs with AD_DATADOGHQ_COM containing config only for non-containers, no container exists for the app
+			// inputs with AD.KLOUDFUSE.COM containing config only for non-containers, no container exists for the app
 			tc: "ad_config_present_for_non_container_no_container_running",
 			aLRP: map[string][]*cloudfoundry.ActualLRP{
 				"differentprocessguid1": {{ProcessGUID: "differentprocessguid1", CellID: "cellX", Index: 1}},
@@ -224,7 +224,7 @@ func TestCloudFoundryConfigProvider_Collect(t *testing.T) {
 			},
 		},
 		{
-			// inputs with AD_DATADOGHQ_COM containing config only for non-containers, 1 container exists for the app
+			// inputs with AD.KLOUDFUSE.COM containing config only for non-containers, 1 container exists for the app
 			// NOTE: the only difference here is that the NodeName for the check should be the same as CellID of the container
 			tc: "ad_config_present_for_non_container_1_container_running",
 			aLRP: map[string][]*cloudfoundry.ActualLRP{

@@ -70,7 +70,7 @@ func TestGetSourceShouldBeOverridenByAutoDiscoveryAnnotation(t *testing.T) {
 			Namespace: "buu",
 			UID:       "baz",
 			Annotations: map[string]string{
-				"ad.datadoghq.com/foo.logs": `[{"source":"any_source","service":"any_service","tags":["tag1","tag2"]}]`,
+				"ad.kloudfuse.com/foo.logs": `[{"source":"any_source","service":"any_service","tags":["tag1","tag2"]}]`,
 			},
 		},
 		Status: kubelet.Status{
@@ -103,7 +103,7 @@ func TestGetSourceShouldFailWithInvalidAutoDiscoveryAnnotation(t *testing.T) {
 			UID:       "baz",
 			Annotations: map[string]string{
 				// missing [ ]
-				"ad.datadoghq.com/foo.logs": `{"source":"any_source","service":"any_service","tags":["tag1","tag2"]}`,
+				"ad.kloudfuse.com/foo.logs": `{"source":"any_source","service":"any_service","tags":["tag1","tag2"]}`,
 			},
 		},
 		Status: kubelet.Status{
@@ -163,7 +163,7 @@ func TestContainerCollectAll(t *testing.T) {
 			Namespace: "podNamespace",
 			UID:       "podUIDFoo",
 			Annotations: map[string]string{
-				"ad.datadoghq.com/fooName.logs": `[{"source":"any_source","service":"any_service"}]`,
+				"ad.kloudfuse.com/fooName.logs": `[{"source":"any_source","service":"any_service"}]`,
 			},
 		},
 		Status: kubelet.Status{
@@ -295,7 +295,7 @@ func TestGetSourceServiceNameOrder(t *testing.T) {
 					Namespace: "podNamespace",
 					UID:       "podUIDFoo",
 					Annotations: map[string]string{
-						"ad.datadoghq.com/fooName.logs": `[{"source":"foo","service":"annotServiceName"}]`,
+						"ad.kloudfuse.com/fooName.logs": `[{"source":"foo","service":"annotServiceName"}]`,
 					},
 				},
 			},
@@ -317,7 +317,7 @@ func TestGetSourceServiceNameOrder(t *testing.T) {
 					Namespace: "podNamespace",
 					UID:       "podUIDFoo",
 					Annotations: map[string]string{
-						"ad.datadoghq.com/fooName.logs": `[{"source":"foo"}]`,
+						"ad.kloudfuse.com/fooName.logs": `[{"source":"foo"}]`,
 					},
 				},
 			},

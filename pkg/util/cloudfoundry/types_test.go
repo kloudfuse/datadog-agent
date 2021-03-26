@@ -139,7 +139,7 @@ var BBSModelD1 = models.DesiredLRP{
 								Value: "some value",
 							},
 							{
-								Name:  "AD_DATADOGHQ_COM",
+								Name:  "AD.KLOUDFUSE.COM",
 								Value: "{\"xxx\": {}}", // make this a valid JSON
 							},
 							{

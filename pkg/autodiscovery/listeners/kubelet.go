@@ -26,9 +26,9 @@ import (
 )
 
 const (
-	newPodAnnotationFormat              = "ad.datadoghq.com/%s.instances"
+	newPodAnnotationFormat              = "ad.kloudfuse.com/%s.instances"
 	legacyPodAnnotationFormat           = "service-discovery.datadoghq.com/%s.instances"
-	newPodAnnotationCheckNamesFormat    = "ad.datadoghq.com/%s.check_names"
+	newPodAnnotationCheckNamesFormat    = "ad.kloudfuse.com/%s.check_names"
 	legacyPodAnnotationCheckNamesFormat = "service-discovery.datadoghq.com/%s.check_names"
 )
 

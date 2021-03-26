@@ -302,7 +302,7 @@ Enhancement Notes
 
 - Scrub container args as well for orchestrator explorer.
 
-- Support custom autodiscovery identifiers on Kubernetes using the `ad.datadoghq.com/<container_name>.check.id` pod annotation.
+- Support custom autodiscovery identifiers on Kubernetes using the `ad.kloudfuse.com/<container_name>.check.id` pod annotation.
 
 - The CPU check now collects system-wide context switches on Linux.
 
@@ -3142,7 +3142,7 @@ Enhancement Notes
 -----------------
 
 - AutoDiscovery can now monitor unready pods.
-  It looks for a new pod annotation "ad.datadoghq.com/tolerate-unready"
+  It looks for a new pod annotation "ad.kloudfuse.com/tolerate-unready"
   which, if set to `true` will make AutoDiscovery monitor that pod
   regardless of its readiness state.
 
@@ -3219,7 +3219,7 @@ Bug Fixes
 
 - Fix an auto-discovery annotation value parsing limitation in version 6
   compared to version 5.
-  Now, ``ad.datadoghq.com/*.instances`` annotation key supports value like ``[[{"foo":"bar1"}, {"foo":"bar2"}], {"name":"bar3"}]``
+  Now, ``ad.kloudfuse.com/*.instances`` annotation key supports value like ``[[{"foo":"bar1"}, {"foo":"bar2"}], {"name":"bar3"}]``
 
 - The agent container will now output valid JSON when using JSON log format.
 
@@ -3538,7 +3538,7 @@ Enhancement Notes
 -----------------
 
 - AutoDiscovery can now monitor unready pods.
-  It looks for a new pod annotation "ad.datadoghq.com/tolerate-unready"
+  It looks for a new pod annotation "ad.kloudfuse.com/tolerate-unready"
   which, if set to `true` will make AutoDiscovery monitor that pod
   regardless of its readiness state.
 

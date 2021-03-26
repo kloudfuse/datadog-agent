@@ -21,14 +21,14 @@ func TestGetCustomCheckID(t *testing.T) {
 	}{
 		{
 			name:          "found",
-			annotations:   map[string]string{"ad.datadoghq.com/foo.check.id": "bar"},
+			annotations:   map[string]string{"ad.kloudfuse.com/foo.check.id": "bar"},
 			containerName: "foo",
 			want:          "bar",
 			found:         true,
 		},
 		{
 			name:          "not found",
-			annotations:   map[string]string{"ad.datadoghq.com/foo.check.id": "bar"},
+			annotations:   map[string]string{"ad.kloudfuse.com/foo.check.id": "bar"},
 			containerName: "baz",
 			want:          "",
 			found:         false,

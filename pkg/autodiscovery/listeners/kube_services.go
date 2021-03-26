@@ -27,7 +27,7 @@ import (
 )
 
 const (
-	kubeServiceAnnotationFormat = "ad.datadoghq.com/service.instances"
+	kubeServiceAnnotationFormat = "ad.kloudfuse.com/service.instances"
 )
 
 // KubeServiceListener listens to kubernetes service creation

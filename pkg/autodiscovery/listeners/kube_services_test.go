@@ -31,9 +31,9 @@ func TestProcessService(t *testing.T) {
 				"tags.datadoghq.com/service": "my-http-service",
 			},
 			Annotations: map[string]string{
-				"ad.datadoghq.com/service.check_names":  "[\"http_check\"]",
-				"ad.datadoghq.com/service.init_configs": "[{}]",
-				"ad.datadoghq.com/service.instances":    "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
+				"ad.kloudfuse.com/service.check_names":  "[\"http_check\"]",
+				"ad.kloudfuse.com/service.init_configs": "[{}]",
+				"ad.kloudfuse.com/service.instances":    "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
 			},
 			Name:      "myservice",
 			Namespace: "default",
@@ -222,9 +222,9 @@ func TestServicesDiffer(t *testing.T) {
 				ObjectMeta: metav1.ObjectMeta{
 					ResourceVersion: "124",
 					Annotations: map[string]string{
-						"ad.datadoghq.com/service.check_names":  "[\"http_check\"]",
-						"ad.datadoghq.com/service.init_configs": "[{}]",
-						"ad.datadoghq.com/service.instances":    "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
+						"ad.kloudfuse.com/service.check_names":  "[\"http_check\"]",
+						"ad.kloudfuse.com/service.init_configs": "[{}]",
+						"ad.kloudfuse.com/service.instances":    "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
 					},
 				},
 				Spec: v1.ServiceSpec{
@@ -241,9 +241,9 @@ func TestServicesDiffer(t *testing.T) {
 				ObjectMeta: metav1.ObjectMeta{
 					ResourceVersion: "123",
 					Annotations: map[string]string{
-						"ad.datadoghq.com/service.check_names":  "[\"http_check\"]",
-						"ad.datadoghq.com/service.init_configs": "[{}]",
-						"ad.datadoghq.com/service.instances":    "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
+						"ad.kloudfuse.com/service.check_names":  "[\"http_check\"]",
+						"ad.kloudfuse.com/service.init_configs": "[{}]",
+						"ad.kloudfuse.com/service.instances":    "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
 					},
 				},
 				Spec: v1.ServiceSpec{

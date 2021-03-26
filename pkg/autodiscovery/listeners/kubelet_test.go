@@ -202,9 +202,9 @@ func getMockedPods() []*kubelet.Pod {
 				UID:  "mock-pod-uid",
 				Name: "mock-pod",
 				Annotations: map[string]string{
-					"ad.datadoghq.com/baz.check_names": "[\"baz_check\"]",
-					"ad.datadoghq.com/baz.instances":   "[]",
-					"ad.datadoghq.com/custom.check.id": "custom-check-id",
+					"ad.kloudfuse.com/baz.check_names": "[\"baz_check\"]",
+					"ad.kloudfuse.com/baz.instances":   "[]",
+					"ad.kloudfuse.com/custom.check.id": "custom-check-id",
 				},
 			},
 		},

@@ -24,7 +24,7 @@ import (
 )
 
 const (
-	podAnnotationPrefix              = "ad.datadoghq.com/"
+	podAnnotationPrefix              = "ad.kfuse.com/"
 	podContainerTagsAnnotationFormat = podAnnotationPrefix + "%s.tags"
 	podTagsAnnotation                = podAnnotationPrefix + "tags"
 	podStandardLabelPrefix           = "tags.datadoghq.com/"

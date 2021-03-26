@@ -9,6 +9,6 @@
 enhancements:
   - |
     AutoDiscovery can now monitor unready pods.
-    It looks for a new pod annotation "ad.datadoghq.com/tolerate-unready"
+    It looks for a new pod annotation "ad.kloudfuse.com/tolerate-unready"
     which, if set to `true` will make AutoDiscovery monitor that pod
     regardless of its readiness state.

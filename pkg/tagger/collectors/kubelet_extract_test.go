@@ -605,8 +605,8 @@ func TestParsePods(t *testing.T) {
 						"noTag":                          "don't collect",
 						"GitCommit":                      "ea38b55f07e40b68177111a2bff1e918132fd5fb",
 						"OwnerTeam":                      "Kenafeh",
-						"ad.datadoghq.com/tags":          `{"pod_template_version": "1.0.0"}`,
-						"ad.datadoghq.com/dd-agent.tags": `{"agent_version": "6.9.0"}`,
+						"ad.kloudfuse.com/tags":          `{"pod_template_version": "1.0.0"}`,
+						"ad.kloudfuse.com/dd-agent.tags": `{"agent_version": "6.9.0"}`,
 					},
 				},
 				Status: dockerContainerStatus,
@@ -1177,8 +1177,8 @@ func TestParsePods(t *testing.T) {
 			pod: &kubelet.Pod{
 				Metadata: kubelet.PodMetadata{
 					Annotations: map[string]string{
-						"ad.datadoghq.com/tags":          `{"pod_template_version": "1.0.0", "team": ["A", "B"]}`,
-						"ad.datadoghq.com/dd-agent.tags": `{"agent_version": "6.9.0", "python_version": ["2", "3"]}`,
+						"ad.kloudfuse.com/tags":          `{"pod_template_version": "1.0.0", "team": ["A", "B"]}`,
+						"ad.kloudfuse.com/dd-agent.tags": `{"agent_version": "6.9.0", "python_version": ["2", "3"]}`,
 					},
 				},
 				Status: dockerContainerStatus,

@@ -26,7 +26,7 @@ import (
 
 const (
 	// AD on the load-balanced service IPs
-	kubeServiceAnnotationPrefix = "ad.datadoghq.com/service."
+	kubeServiceAnnotationPrefix = "ad.kloudfuse.com/service."
 )
 
 // KubeServiceConfigProvider implements the ConfigProvider interface for the apiserver.

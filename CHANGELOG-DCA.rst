@@ -86,7 +86,7 @@ Enhancement Notes
 - Add new configuration parameter to allow 'GroupExec' permission on the secret-backend command.
   The new parameter ('secret_backend_command_allow_group_exec_perm') is now enabled by default in the cluster-agent image.
 
-- Add resolve option to endpoint checks through new annotation `ad.datadoghq.com/endpoints.resolve`. With `ip` value, it allows endpoint checks to target static pods
+- Add resolve option to endpoint checks through new annotation `ad.kloudfuse.com/endpoints.resolve`. With `ip` value, it allows endpoint checks to target static pods
 
 - Expose metrics for the cluster level checks advanced dispatching.
 

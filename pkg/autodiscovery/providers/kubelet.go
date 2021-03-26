@@ -20,7 +20,7 @@ import (
 )
 
 const (
-	newPodAnnotationPrefix    = "ad.datadoghq.com/"
+	newPodAnnotationPrefix    = "ad.kloudfuse.com/"
 	newPodAnnotationFormat    = newPodAnnotationPrefix + "%s."
 	legacyPodAnnotationPrefix = "service-discovery.datadoghq.com/"
 	legacyPodAnnotationFormat = legacyPodAnnotationPrefix + "%s."

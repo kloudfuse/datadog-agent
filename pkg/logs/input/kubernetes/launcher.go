@@ -296,9 +296,9 @@ func getTaggerEntityID(ctrID string) string {
 
 // configPath refers to the configuration that can be passed over a pod annotation,
 // this feature is commonly named 'ad' or 'autodiscovery'.
-// The pod annotation must respect the format: ad.datadoghq.com/<container_name>.logs: '[{...}]'.
+// The pod annotation must respect the format: ad.kloudfuse.com/<container_name>.logs: '[{...}]'.
 const (
-	configPathPrefix = "ad.datadoghq.com"
+	configPathPrefix = "ad.kloudfuse.com"
 	configPathSuffix = "logs"
 )
 

@@ -21,7 +21,7 @@ import (
 
 const (
 	// EnvAdVariableName is the name of the environment variable storing AD settings
-	EnvAdVariableName = "AD_DATADOGHQ_COM"
+	EnvAdVariableName = "AD.KLOUDFUSE.COM"
 	// EnvVcapServicesVariableName is the name of the environment variable storing the services for the app
 	EnvVcapServicesVariableName = "VCAP_SERVICES"
 	// EnvVcapApplicationName is the name of the environment variable storing the application definition
@@ -48,7 +48,7 @@ var (
 	}
 )
 
-// ADConfig represents the structure of ADConfig in AD_DATADOGHQ_COM environment variable
+// ADConfig represents the structure of ADConfig in AD.KLOUDFUSE.COM environment variable
 // the AD config looks like:
 // {"my-http-app": {"check_names": ..., "init_configs": ..., "instances": ..., "variables": ...}, ...}
 // we need to unmarshal the values of check_names, init_configs and instances to json.RawMessage

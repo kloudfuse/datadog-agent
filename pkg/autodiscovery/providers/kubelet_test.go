@@ -50,9 +50,9 @@ func TestParseKubeletPodlist(t *testing.T) {
 			pod: &kubelet.Pod{
 				Metadata: kubelet.PodMetadata{
 					Annotations: map[string]string{
-						"ad.datadoghq.com/apache.check_names":                 "[\"http_check\"]",
-						"ad.datadoghq.com/apache.init_configs":                "[{}]",
-						"ad.datadoghq.com/apache.instances":                   "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
+						"ad.kloudfuse.com/apache.check_names":                 "[\"http_check\"]",
+						"ad.kloudfuse.com/apache.init_configs":                "[{}]",
+						"ad.kloudfuse.com/apache.instances":                   "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
 						"service-discovery.datadoghq.com/apache.check_names":  "[\"invalid\"]",
 						"service-discovery.datadoghq.com/apache.init_configs": "[{}]",
 						"service-discovery.datadoghq.com/apache.instances":    "[{}]",
@@ -88,12 +88,12 @@ func TestParseKubeletPodlist(t *testing.T) {
 			pod: &kubelet.Pod{
 				Metadata: kubelet.PodMetadata{
 					Annotations: map[string]string{
-						"ad.datadoghq.com/apache.check_names":  "[\"http_check\"]",
-						"ad.datadoghq.com/apache.init_configs": "[{}]",
-						"ad.datadoghq.com/apache.instances":    "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
-						"ad.datadoghq.com/nginx.check_names":   "[\"http_check\"]",
-						"ad.datadoghq.com/nginx.init_configs":  "[{}]",
-						"ad.datadoghq.com/nginx.instances":     "[{\"name\": \"Other service\", \"url\": \"http://%%host_external%%\", \"timeout\": 1}]",
+						"ad.kloudfuse.com/apache.check_names":  "[\"http_check\"]",
+						"ad.kloudfuse.com/apache.init_configs": "[{}]",
+						"ad.kloudfuse.com/apache.instances":    "[{\"name\": \"My service\", \"url\": \"http://%%host%%\", \"timeout\": 1}]",
+						"ad.kloudfuse.com/nginx.check_names":   "[\"http_check\"]",
+						"ad.kloudfuse.com/nginx.init_configs":  "[{}]",
+						"ad.kloudfuse.com/nginx.instances":     "[{\"name\": \"Other service\", \"url\": \"http://%%host_external%%\", \"timeout\": 1}]",
 					},
 				},
 				Status: kubelet.Status{
@@ -183,10 +183,10 @@ func TestParseKubeletPodlist(t *testing.T) {
 			pod: &kubelet.Pod{
 				Metadata: kubelet.PodMetadata{
 					Annotations: map[string]string{
-						"ad.datadoghq.com/nginx.check.id":            "nginx-custom",
-						"ad.datadoghq.com/nginx-custom.check_names":  "[\"http_check\"]",
-						"ad.datadoghq.com/nginx-custom.init_configs": "[{}]",
-						"ad.datadoghq.com/nginx-custom.instances":    "[{\"name\": \"Other service\", \"url\": \"http://%%host_external%%\", \"timeout\": 1}]",
+						"ad.kloudfuse.com/nginx.check.id":            "nginx-custom",
+						"ad.kloudfuse.com/nginx-custom.check_names":  "[\"http_check\"]",
+						"ad.kloudfuse.com/nginx-custom.init_configs": "[{}]",
+						"ad.kloudfuse.com/nginx-custom.instances":    "[{\"name\": \"Other service\", \"url\": \"http://%%host_external%%\", \"timeout\": 1}]",
 					},
 				},
 				Status: kubelet.Status{

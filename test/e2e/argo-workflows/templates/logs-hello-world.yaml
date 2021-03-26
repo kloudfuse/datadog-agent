@@ -26,7 +26,7 @@ spec:
                 labels:
                   app: logs-hello-world
                 annotations:
-                  ad.datadoghq.com/logs-short-lived-container.logs: '[{"source":"shell","service":"logs"}]'
+                  ad.kloudfuse.com/logs-short-lived-container.logs: '[{"source":"shell","service":"logs"}]'
               spec:
                 initContainers:
                 - name: logs-init-container
