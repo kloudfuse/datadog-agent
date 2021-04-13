@@ -274,7 +274,6 @@ workflows:
   test_and_build:
     jobs:
       - checkout_code
-      - macos_tests
       - dependencies:
           requires:
             - checkout_code
